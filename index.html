@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>PS8 Network - Login</title>
+</head>
+
+<body class="login-page">
+    <div class="l-content">
+        <div class="ps8">
+            <img src="/img/ps8 logo.png" alt="" id="l-plogo">
+            <img src="/img/ps8.png" alt="" id="l-pname">
+        </div>
+        <div id="l-h1">
+            <h1>LOGIN</h1>
+        </div><br>
+        <div id="l-form">
+            <form action="login.php" method="POST" enctype="multipart/form-data">
+                <div id="l-user">
+                    <input type="username" placeholder="USERNAME" name="" required>
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div id="l-pass">
+                    <input type="password" placeholder="PASSWORD" name="" required>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+        </div>
+        <div id="l-rem">
+            <label>
+                <input type="checkbox">Remember me
+            </label>
+            <a id="l-p" href="#">forgot password?</a>
+        </div>
+        <br>
+        <input type="submit" value="LOGIN" id="l-a1">
+        </form>
+        <p id="l-p1"><br>
+            do you have a account?
+        </p>
+        <div id="g_id_onload" data-client_id="833791039769-377ok9cd1qor2tq5pjmsoqn194li6fid.apps.googleusercontent.com"
+            data-context="signup" data-ux_mode="popup" data-login_uri="https://ps8network.com/login"
+            data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black"
+            data-text="signin_with" data-size="large" data-logo_alignment="left">
+        </div>
+    </div>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+</body>
+</html>
