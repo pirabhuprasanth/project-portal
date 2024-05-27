@@ -1,30 +1,22 @@
 <?php
-require '/scripts/db.php';
+// Include database connection
+include_once 'db_connect.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+// Get form data
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-    $db = getMongoDB();
-    $collection = $db->users;
+// Hash the password
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    $existingUser = $collection->findOne(['email' => $username]);
-
-    if ($existingUser) {
-        echo "User already exists!";
-    } else {
-        $result = $collection->insertOne([
-            'email' => $username,
-            'password' => $password
-        ]);
-
-        if ($result->getInsertedCount() === 1) {
-            echo "Registration successful!";
-        } else {
-            echo "Failed to register.";
-        }
-    }
+// Insert user into database
+$sql = "INSERT INTO users (email, password) VALUES ('$email', '$passwordHash')";
+if (mysqli_query($conn, $sql)) {
+    echo "Registration successful!";
 } else {
-    echo "Invalid request.";
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
+
+// Close database connection
+mysqli_close($conn);
 ?>
