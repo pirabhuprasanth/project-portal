@@ -1,0 +1,18 @@
+{
+    "name": "login/ps8network",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Login\\Ps8network\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PIRABHU PRASANTH",
+            "email": "97213685+pirabhuprasanth@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
