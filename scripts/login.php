@@ -1,28 +1,42 @@
 <?php
-// Include database connection
-include_once 'db_connect.php';
+session_start();
+include_once('connection.php');
 
-// Get form data
-$email = $_POST['email'];
-$password = $_POST['password'];
+if (isset($_POST['login'])) {
 
-// Retrieve user from database
-$sql = "SELECT * FROM users WHERE email='$email'";
-$result = mysqli_query($conn, $sql);
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
 
-if (mysqli_num_rows($result) > 0) {
-    // User found, verify password
-    $row = mysqli_fetch_assoc($result);
-    if (password_verify($password, $row['password'])) {
-        echo "Login successful!";
-        // Start session or set cookies to maintain login state
+    $sql = "SELECT * FROM `tbl_user` WHERE `username`='$username' AND `password`='$password'";
+    $result = mysqli_query($conn, $sql);
+
+    if (empty($_POST['username']) && empty($_POST['password'])) {
+        echo "<script>alert('Please Fill Username and Password');</script>";
+        exit;
+    } elseif (empty($_POST['password'])) {
+        echo "<script>alert('Please Fill Password');</script>";
+        exit;
+    } elseif (empty($_POST['username'])) {
+        echo "<script>alert('Please Fill Username);</script>";
+        exit;
     } else {
-        echo "Incorrect password!";
-    }
-} else {
-    echo "User not found!";
-}
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_array($result);
+            $name = $row['name'];
+            $username = $row['username'];
+            $password = $row['password'];
 
-// Close database connection
-mysqli_close($conn);
-?>
+
+            if ($username == $username && $password == $password) {
+                $_SESSION['name'] = $name;
+                $_SESSION['username'] = $username;
+                $_SESSION['password'] = $password;
+                header('location:welcome.php');
+            }
+        } else {
+            echo "<script>alert('Invalid Username or Password');</script>";
+            exit;
+        }
+    }
+
+}
